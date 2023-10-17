@@ -1,3 +1,5 @@
+package model
+
 import (
 	"time"
 
@@ -6,21 +8,22 @@ import (
 )
 
 type Bank struct {
-	Base `valid:"required"`
-	Code String `json:"code" valid:"notnull"`
-	Name String `json:"name" valid:"notnull"`
+	Base     `valid:"required"`
+	Code     string     `json:"code" valid:"notnull"`
+	Name     string     `json:"name" valid:"notnull"`
+	Accounts []*Account `valid:"-"`
 }
 
 func (bank *Bank) isValid() error {
 	_, err := govalidator.ValidateStruct(bank)
 	if err != nil {
-		return null, err
+		return err
 	}
 	return nil
 }
- 
+
 func NewBank(code string, name string) (*Bank, error) {
-	bank := Bank {
+	bank := Bank{
 		Code: code,
 		Name: name,
 	}
@@ -30,7 +33,7 @@ func NewBank(code string, name string) (*Bank, error) {
 
 	err := bank.isValid()
 	if err != nil {
-		return null, err
+		return nil, err
 	}
 
 	return &bank, nil
