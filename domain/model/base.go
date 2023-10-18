@@ -6,8 +6,8 @@ import (
 	"github.com/asaskevich/govalidator"
 )
 
-fun init(){
-	govalidator.SetFieldsRequoredByDefault(value:true)
+func init(){
+	govalidator.SetFieldsRequoredByDefault(true)
 }
 
 type Base struct {
@@ -15,5 +15,5 @@ type Base struct {
 	CreatedAt time.Time `json:"created_at" valid:"-"`
 	UpdatedAt time.Time `json:"updated_at" valid:"-"`
 }
-package model
+
 
